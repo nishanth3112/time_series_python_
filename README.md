@@ -1,78 +1,71 @@
 # 💼 Walmart Sales Forecasting and Demand Analytics
 
-![Tableau](https://img.shields.io/badge/Tool-Tableau-blue)
-![AWS RDS](https://img.shields.io/badge/Cloud-AWS%20RDS-orange)
-![SQL Server](https://img.shields.io/badge/Database-SQL%20Server-lightgrey)
-![SQL](https://img.shields.io/badge/Language-SQL-green)
-![Data Visualization](https://img.shields.io/badge/Focus-Data%20Visualization-purple)
-![Finance Analytics](https://img.shields.io/badge/Domain-Financial%20Analytics-yellow)
-![License](https://img.shields.io/badge/License-Educational-success)
-
-🛠️ **Tech Stack:** Tableau · AWS RDS (SQL Server) · SQL · Data Visualization  
----
-
-## 📌 Overview
-
-This project presents an **end-to-end financial analytics solution** built on **Tableau** to analyze and visualize **Accounts Receivable (AR)** and **Accounts Payable (AP)** data.  
-By connecting Tableau directly to **AWS RDS (SQL Server)**, it computes and visualizes **key working-capital metrics** — **DSO (Days Sales Outstanding)** and **DPO (Days Payable Outstanding)** — helping enterprises improve liquidity, cash-flow visibility, and operational efficiency.
+![Python](https://img.shields.io/badge/Python-3.10-blue)
+![Greykite](https://img.shields.io/badge/Library-Greykite-lightblue)
+![Neural Prophet](https://img.shields.io/badge/Model-Neural%20Prophet-orange)
+![Machine Learning](https://img.shields.io/badge/Category-Time%20Series%20Forecasting-green)
+![Pandas](https://img.shields.io/badge/Data-Pandas-yellow)
+![Matplotlib](https://img.shields.io/badge/Visualization-Matplotlib-red)
+![Seaborn](https://img.shields.io/badge/Visualization-Seaborn-purple)
 
 ---
 
-## 🎯 Objectives
+## 📌 Project Overview
 
-- Enable real-time monitoring of receivables and payables through Tableau dashboards.  
-- Identify inefficiencies and risks in customer payments and supplier management.  
-- Apply **DSO/DPO metrics** and **Aging Buckets (0–30, 31–60, 61–90, 90+)** for financial benchmarking.  
-- Enhance working-capital decision-making via interactive, KPI-driven dashboards.  
+This project focuses on **Time Series Forecasting** using **Greykite** (LinkedIn) and **Neural Prophet** (Meta/Facebook) to predict future sales based on historical data.
 
----
+The dataset contains **Walmart store sales** across 45 stores in multiple regions, providing the foundation for analyzing trends, seasonality, and external drivers (e.g., holidays, CPI, fuel price).
 
-## 🏗️ Architecture
-
-### 🔹 Architecture Summary
-
-The project architecture integrates **cloud-based data storage, SQL data transformation, and Tableau visualization** into a unified pipeline:
-
-1. **Data Source Layer (AWS RDS – SQL Server)**  
-   - Stores transactional AR/AP data (invoices, payments, customers, suppliers).  
-   - Queries executed to extract and aggregate key metrics.
-
-2. **Data Preparation Layer (SQL Scripts)**  
-   - SQL joins and transformations calculate:
-     - Days Sales Outstanding (DSO)
-     - Days Payable Outstanding (DPO)
-     - Aging buckets (0–30, 31–60, 61–90, 90+ days)
-   - Cleaned and structured datasets exported for Tableau.
-
-3. **Visualization Layer (Tableau)**  
-   - Two dashboards:  
-     - **Accounts Receivable Dashboard** → customer collections, overdue invoices.  
-     - **Accounts Payable Dashboard** → supplier payment cycles and optimization.
-
-4. **Insights & Decision Layer**  
-   - Tableau KPIs highlight top overdue accounts, supplier dependencies, and late-payment risks.
+### 🧭 Objective
+To **predict weekly sales** using historical data and relevant external features, enabling better inventory planning and business forecasting.
 
 ---
 
-## ⚙️ Data Source & Integration
+## 🧩 Business Context
 
-- **Cloud:** AWS RDS (SQL Server)  
-- **Tables:** Customers, Suppliers, Invoices, Payments, Credit Limits  
-- **Integration:** Tableau live connection to SQL Server using AWS credentials  
+Time series forecasting answers the key business question:  
+> “How did the past influence the future?”
 
-**SQL Extract Example:**
-```sql
-SELECT 
-    CustomerID,
-    InvoiceID,
-    DATEDIFF(day, InvoiceDate, PaymentDate) AS DaysOutstanding,
-    CASE 
-        WHEN DATEDIFF(day, InvoiceDate, PaymentDate) <= 30 THEN '0–30 Days'
-        WHEN DATEDIFF(day, InvoiceDate, PaymentDate) <= 60 THEN '31–60 Days'
-        WHEN DATEDIFF(day, InvoiceDate, PaymentDate) <= 90 THEN '61–90 Days'
-        ELSE '90+ Days'
-    END AS AgingBucket,
-    InvoiceAmount,
-    PaymentAmount
-FROM Receivables
-WHERE InvoiceStatus = 'Open' OR InvoiceStatus = 'Paid';
+It connects the **past, present, and future** to uncover demand patterns for:
+- 📦 Supply chain optimization  
+- 🚗 Ride-hailing demand & pricing  
+- 🏬 Retail sales planning  
+
+For Walmart, accurate forecasting drives better **inventory management**, **promotion planning**, and **profit optimization** during holidays and seasonal events.
+
+---
+
+## 🗂️ Dataset Description
+
+**Source:** [Walmart Recruiting – Store Sales Forecasting (Kaggle)](https://www.kaggle.com/c/walmart-recruiting-store-sales-forecasting/data)
+
+| File | Description |
+|------|--------------|
+| **Stores.csv** | Store metadata – type and size |
+| **Train.csv** | Weekly sales (2010-02-05 → 2012-11-01) |
+| **Test.csv** | Same structure as Train, without Weekly_Sales |
+| **Features.csv** | External features – Fuel Price, CPI, Unemployment, MarkDown data, IsHoliday flag |
+
+**Key Columns**
+- `Store` – Store ID  
+- `Dept` – Department number  
+- `Date` – Week ending date  
+- `Weekly_Sales` – Weekly sales ($)  
+- `IsHoliday` – Binary holiday indicator  
+- `Fuel_Price` – Regional fuel price  
+- `CPI` – Consumer Price Index  
+- `Unemployment` – Regional unemployment rate  
+
+---
+
+## ⚙️ Tech Stack
+
+- **Language:** Python 3.10  
+- **Libraries:** `greykite`, `neuralprophet`, `scikit-learn`, `pandas`, `pandas_profiling`, `matplotlib`, `plotly`, `seaborn`, `numpy`
+
+---
+
+## 🏗️ Architecture Diagram
+
+The architecture connects **data ingestion → processing → model training → forecast visualization**.
+
