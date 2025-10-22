@@ -171,18 +171,6 @@ pip install -r requirements.txt
 
 ---
 
-## 📊 Results & Comparison
-
-| Model | RMSE | MAPE | Highlights |
-|-------|------|------|-------------|
-| **Greykite Silverkite** | 890.5 | 7.1 % | Accurate trend & seasonality capture |
-| **Neural Prophet** | 842.9 | 6.8 % | Robust to holiday and non-linear patterns |
-
-📈 Greykite = Statistical accuracy · Transparency  
-🧠 Neural Prophet = Deep pattern learning · Dynamic adjustment  
-
----
-
 ## 🧪 Key Takeaways
 
 ✅ Comprehensive understanding of time series behavior  
