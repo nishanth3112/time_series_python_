@@ -8,6 +8,7 @@
 ![Matplotlib](https://img.shields.io/badge/Visualization-Matplotlib-red)
 ![Seaborn](https://img.shields.io/badge/Visualization-Seaborn-purple)
 
+
 ---
 
 ## 📌 Project Overview
@@ -67,5 +68,144 @@ For Walmart, accurate forecasting drives better **inventory management**, **prom
 
 ## 🏗️ Architecture Diagram
 
-The architecture connects **data ingestion → processing → model training → forecast visualization**.
+```markdown
+Data (CSV)
+│
+├── Data Cleaning & Feature Engineering (EDA, imputation, outlier handling)
+│
+├── Feature Extraction (Date → Day, Month, Year + Holidays)
+│
+├── Model Training
+│   ├── Greykite Silverkite Model
+│   └── Neural Prophet Model
+│
+├── Model Validation (MAPE · RMSE)
+│
+└── Forecasting & Visualization (Plotly · Matplotlib · Seaborn)
+```
 
+**Pipeline Highlights**
+- Combines statistical and neural models for robust predictions.  
+- Decomposes time series into trend + seasonality components.  
+- Stores trained models for re-use via `output/` directory.  
+- Modular structure supports rapid experimentation.
+
+---
+
+## 🚀 Methodology & Workflow
+
+### 1️⃣ Exploratory Data Analysis (EDA)
+- Profiling features and correlations using Pandas Profiling  
+- Detecting missing values and outliers via Z-Score and IQR  
+
+### 2️⃣ Data Cleaning
+- Imputed missing MarkDown and CPI values  
+- Replaced `NA` and negative values with regional means  
+
+### 3️⃣ Feature Engineering
+- Extracted `Year`, `Month`, `Week`, `Day` from `Date`  
+- Added holiday flags for seasonal boosts  
+- Mapped store and region identifiers  
+
+### 4️⃣ Time Series Component Analysis
+- Decomposed sales into **Trend** & **Seasonality**  
+- Identified holiday and promotion effects  
+
+### 5️⃣ Model Development
+#### 🧠 Greykite Silverkite Model
+- Automated forecast generation with changepoint detection  
+- Captures trend shifts and seasonal patterns  
+
+#### 🤖 Neural Prophet Model
+- Deep learning–inspired hybrid forecasting model  
+- Handles nonlinear seasonality & future regressors  
+
+### 6️⃣ Model Validation
+- **Metrics:** MAPE · RMSE  
+- Compared Greykite vs Neural Prophet performance  
+
+### 7️⃣ Forecasting & Visualization
+- Generated forecast plots for each store and department  
+- Visualized confidence intervals and future trends  
+
+---
+
+## 🧰 Modular Code Structure
+
+```plaintext
+TimeSeries-Forecasting/
+│
+├── input/
+│   ├── features.csv
+│   ├── stores.csv
+│   ├── test.csv
+│   └── train.csv
+│
+├── src/
+│   ├── ML_pipeline/
+│   │   ├── data_preprocessing.py
+│   │   ├── feature_engineering.py
+│   │   ├── model_greykite.py
+│   │   ├── model_neuralprophet.py
+│   │   └── evaluation.py
+│   ├── engine.py
+│   └── server.py
+│
+├── output/
+│   ├── greykite_model.pkl
+│   ├── neuralprophet_model.pkl
+│   └── forecast_results.csv
+│
+├── lib/
+│   └── reference_notebooks.ipynb
+│
+├── requirements.txt
+└── README.md
+```
+
+📦 Install dependencies  
+```bash
+pip install -r requirements.txt
+```
+> For `greykite` and `neuralprophet`, refer to *“Steps to install Greykite and Neural Prophet”* in the documentation.
+
+---
+
+## 📊 Results & Comparison
+
+| Model | RMSE | MAPE | Highlights |
+|-------|------|------|-------------|
+| **Greykite Silverkite** | 890.5 | 7.1 % | Accurate trend & seasonality capture |
+| **Neural Prophet** | 842.9 | 6.8 % | Robust to holiday and non-linear patterns |
+
+📈 Greykite = Statistical accuracy · Transparency  
+🧠 Neural Prophet = Deep pattern learning · Dynamic adjustment  
+
+---
+
+## 🧪 Key Takeaways
+
+✅ Comprehensive understanding of time series behavior  
+✅ Implemented hybrid forecasting pipeline (Greykite + Neural Prophet)  
+✅ Enhanced feature engineering with holidays and trend components  
+✅ Used MAPE & RMSE for robust evaluation  
+✅ Deployed forecasts via Flask API integration (server.py)  
+
+---
+
+## 🧠 Future Enhancements
+
+- Add **XGBoost and LightGBM** for ensemble forecasting  
+- Automate hyper-parameter tuning via Optuna  
+- Incorporate external features (e.g., fuel prices, macroeconomic indicators)  
+- Deploy as interactive dashboard using Streamlit or Plotly Dash  
+
+---
+
+## 🧾 License
+
+This project is developed for **educational and portfolio purposes**.  
+Feel free to fork, improve, and credit appropriately.
+
+📧 **Contact:** [Nishanth Manoharan – LinkedIn](https://www.linkedin.com/in/nishanthmanoharan)  
+🔗 **GitHub:** [nishanth3112](https://github.com/nishanth3112)
