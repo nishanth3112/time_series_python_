@@ -201,11 +201,3 @@ pip install -r requirements.txt
 - Deploy as interactive dashboard using Streamlit or Plotly Dash  
 
 ---
-
-## 🧾 License
-
-This project is developed for **educational and portfolio purposes**.  
-Feel free to fork, improve, and credit appropriately.
-
-📧 **Contact:** [Nishanth Manoharan – LinkedIn](https://www.linkedin.com/in/nishanthmanoharan)  
-🔗 **GitHub:** [nishanth3112](https://github.com/nishanth3112)
